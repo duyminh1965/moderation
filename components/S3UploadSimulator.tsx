@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/alt-text */
 import { useState, useCallback, FC } from 'react';
 import { Upload, Database, Zap, ArrowRight, Cloud, FileText, Video, Image } from 'lucide-react';
-import { addContent } from '@/backend/addcontent';
+//import { addContent } from '@/backend/addcontent';
 
 interface S3UploadSimulatorProps {
-  onUpload: (content: string | File, type: 'text' | 'image') => void;
+  onUpload: (content: string | File, type: 'text' | 'image' | 'video') => void;
   isProcessing: boolean;
 }
 
@@ -19,7 +19,7 @@ export const S3UploadSimulator:FC<S3UploadSimulatorProps> = ({ onUpload, isProce
     
     // Stage 2: S3 Event triggers Lambda
     setUploadStage('triggering');
-    await new Promise(resolve => setTimeout(resolve, 800));
+    await new Promise(resolve => setTimeout(resolve, 800));    
     
     // Stage 3: Lambda processes content
     setUploadStage('processing');
@@ -55,15 +55,16 @@ export const S3UploadSimulator:FC<S3UploadSimulatorProps> = ({ onUpload, isProce
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0] as File;      
         simulateS3Upload(file, 'image');
-        const filename = file.name;
-        const contentType = file.type;
-        const url = await addContent( filename, contentType) as string;        
+        //const filename = file.name;
+        //const contentType = file.type;
+        //const url = await addContent( filename, contentType) as string;        
+        
 
-        await fetch(url, {
-          method: 'PUT',
-          body: file,
-          headers: { 'Content-Type': file.type },
-        });                
+        //await fetch(url, {
+        //  method: 'PUT',
+        //  body: file,
+        //  headers: { 'Content-Type': file.type },
+        //});                
       
     }
   }, [simulateS3Upload]);

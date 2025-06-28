@@ -1,7 +1,7 @@
 export interface ModerationResult {
   id: string;
   content: string | File;
-  type: 'text' | 'image';
+  type: 'text' | 'image' | 'video';
   status: 'pending' | 'approved' | 'flagged' | 'rejected';
   confidence: number;
   flags: string[];

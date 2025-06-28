@@ -4,7 +4,7 @@ import React, { useCallback, useState } from 'react';
 import { Upload, FileText, Image } from 'lucide-react';
 
 interface UploadZoneProps {
-  onUpload: (content: string | File, type: 'text' | 'image') => void;
+  onUpload: (content: string | File, type: 'text' | 'image' | 'video') => void;
   isProcessing: boolean;
 }
 

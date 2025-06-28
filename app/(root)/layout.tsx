@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React from 'react';
 import Image from "next/image";
 /* import MobileNav from '@/components/MobileNav'; */
 import { Header } from '@/components/Header';
@@ -9,11 +9,7 @@ import Footer from '@/components/Footer';
 
 
 const RootLayout = ({ children, }: Readonly<{ children: React.ReactNode; }>) => {
-  const [activeTab, setActiveTab] = useState<string>('s3-demo');
-
-  const OnActionTabs = ( activeTabs: string ) => {    
-    setActiveTab(activeTabs);
-  }
+    
   return (
     <div className='relative flex flex-col'>
         <main className='relative'>
@@ -23,7 +19,7 @@ const RootLayout = ({ children, }: Readonly<{ children: React.ReactNode; }>) => 
           </section>          
             {/* <LeftSidebar /> */}
             <section className="flex flex-1 flex-col px-4 sm:px-36">   
-              <NavigationTabs onActionTab={OnActionTabs} />           
+              <NavigationTabs />           
               <div className="mx-auto flex w-full flex-col max-sm:px-4">                   
                 <div className="flex h-16 items-center justify-between md:hidden">                  
                   <Image 

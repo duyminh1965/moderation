@@ -1,10 +1,9 @@
 
 import { useState, useCallback } from 'react';
 import { ModerationResult, AnalyticsData } from '../types';
-import { viewAllItems } from '@/backend/aws-lambda';
 
 // Simulate AWS Lambda + Bedrock/Rekognition processing
-const mockModeration = async (content: string | File, type: 'text' | 'image'): Promise<Omit<ModerationResult, 'id' | 'timestamp'>> => {
+const mockModeration = async (content: string | File, type: 'text' | 'image' | 'video'): Promise<Omit<ModerationResult, 'id' | 'timestamp'>> => {
   // Simulate processing delay
   await new Promise(resolve => setTimeout(resolve, 2000 + Math.random() * 3000));
   
@@ -58,7 +57,7 @@ export const useModeration = () => {
 
   //console.log("KQ: "+items);
 
-  const moderateContent = useCallback(async (content: string | File, type: 'text' | 'image') => {
+  const moderateContent = useCallback(async (content: string | File, type: 'text' | 'image' | 'video') => {
     setIsProcessing(true);    
     
     try {
