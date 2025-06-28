@@ -58,8 +58,10 @@ export const S3UploadSimulator:FC<S3UploadSimulatorProps> = ({ onUpload, isProce
         simulateS3Upload(file, 'image');
         const filename = file.name;
         const contentType = file.type;
-        const url = await addURL( filename, contentType) as string;        
-        alert("url: "+url);
+        const url = await addURL( filename, contentType) as string;   
+      
+        alert("process.env.ACCESS_KEY_ID!: "+process.env.ACCESS_KEY_ID!);
+        alert("process.env.SECRET_ACCESS_KEY!: "+process.env.SECRET_ACCESS_KEY!);
 
         await fetch(url, {
           method: 'PUT',
