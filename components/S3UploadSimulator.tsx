@@ -59,7 +59,7 @@ export const S3UploadSimulator:FC<S3UploadSimulatorProps> = ({ onUpload, isProce
         const filename = file.name;
         const contentType = file.type;
         const url = await addURL( filename, contentType) as string;        
-        
+        alert("url: "+url);
 
         await fetch(url, {
           method: 'PUT',
