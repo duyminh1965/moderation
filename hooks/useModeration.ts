@@ -60,10 +60,8 @@ export const useModeration = () => {
   const moderateContent = useCallback(async (content: string | File, type: 'text' | 'image' | 'video') => {
     setIsProcessing(true);    
     
-    try {
-      alert("type: 1");
-      const result = await mockModeration(content, type);
-      alert("type: 2");
+    try {      
+      const result = await mockModeration(content, type);      
       const newResult: ModerationResult = {
         ...result,
         id: Date.now().toString(),
