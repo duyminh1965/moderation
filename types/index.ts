@@ -55,12 +55,7 @@ export const navigationtab = [
     imgURL:Zap,
     route: "/architecture",
     label: "Architecture",    
-  },
-  {
-    imgURL:Settings,
-    route: "/content-upload",
-    label: "Content Upload",    
-  },
+  },  
   {
     imgURL: BarChart3,
     route: "/analytics",
