@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useCallback, useState } from 'react';
-import { Upload, FileText, Image } from 'lucide-react';
+import { Upload, FileText, Image as ImageIcon } from 'lucide-react';
 
 interface UploadZoneProps {
   onUpload: (content: string | File, type: 'text' | 'image' | 'video') => void;
@@ -74,7 +74,8 @@ export const UploadZone: React.FC<UploadZoneProps> = ({ onUpload, isProcessing }
               : 'text-gray-600 hover:bg-gray-100'
           }`}
         >
-          <Image size={18} />
+          <ImageIcon size={18} />
+
           <span>Image Upload</span>
         </button>
       </div>

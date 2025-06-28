@@ -1,5 +1,5 @@
 import React from 'react';
-import { CheckCircle, AlertTriangle, XCircle, Clock, FileText, Image } from 'lucide-react';
+import { CheckCircle, AlertTriangle, XCircle, Clock, FileText, Image as ImageIcon } from 'lucide-react';
 import { ModerationResult as ModerationResultType } from '../types';
 
 interface ModerationResultProps {
@@ -47,7 +47,7 @@ export const ModerationResult: React.FC<ModerationResultProps> = ({ result }) =>
           {result.type === 'text' ? (
             <FileText className="h-6 w-6 text-blue-500" />
           ) : (
-            <Image className="h-6 w-6 text-purple-500" />
+            <ImageIcon className="h-6 w-6 text-purple-500" />
           )}
           <div>
             <h3 className="font-medium text-gray-900">

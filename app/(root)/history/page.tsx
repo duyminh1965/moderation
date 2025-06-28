@@ -6,7 +6,7 @@ import React from 'react';
 import { History } from 'lucide-react';
 
 const Page = () => {
-  const { results, isProcessing, moderateContent } = useModeration();
+  const { results } = useModeration();
   return (
      <div>
             <div className="mb-6">
