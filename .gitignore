@@ -39,6 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+<<<<<<< HEAD
 
 
 # amplify
@@ -46,3 +47,5 @@ node_modules
 .amplify
 amplify_outputs*
 amplifyconfiguration*
+=======
+>>>>>>> 5f48ab2 (Initial commit from Create Next App)

@@ -9,7 +9,7 @@ import { SNSClient, PublishCommand } from '@aws-sdk/client-sns';
 import { v4 as uuidv4 } from 'uuid';
 import { ModerationResultss } from '../types';
 import { marshall } from '@aws-sdk/util-dynamodb';
-
+import 'dotenv/config';
 const region = process.env.REGION;
 
 const credentials = {
