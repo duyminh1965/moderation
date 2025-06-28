@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { AnalyticsDashboard } from '@/components/AnalyticsDashboard';
 import { useModeration } from '@/hooks/useModeration';
-import { viewAllItems } from '@/backend/aws-lambda';
+//import { viewAllItems } from '@/backend/aws-lambda';
 
 
 const Page = () => {
@@ -12,7 +12,7 @@ const Page = () => {
 
   useEffect(() => {
         const CallData = async () => {
-            const dataFirst = await viewAllItems(process.env.DYNAMODB_TABLE!);
+            const dataFirst = "";//await viewAllItems(process.env.DYNAMODB_TABLE!);
             
             return dataFirst;
         };
