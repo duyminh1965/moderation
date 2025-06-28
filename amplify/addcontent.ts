@@ -9,7 +9,7 @@ const credentials = {
       };
 const s3 = new S3Client({ region, credentials });
 
-export const  addContent = async ( filename: string, contentType: string) => {   
+export const  addURL = async ( filename: string, contentType: string) => {   
   try {
     const key = `uploads/${Date.now()}-${filename}`;
     const command = new PutObjectCommand({

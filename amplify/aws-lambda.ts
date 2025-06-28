@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use server"
-import { S3Handler, S3Event } from 'aws-lambda';
 import { S3Client, GetObjectCommand, HeadObjectCommand } from '@aws-sdk/client-s3';
 import { DynamoDBClient, PutItemCommand, ScanCommand } from '@aws-sdk/client-dynamodb';
 import { DynamoDBDocumentClient, PutCommand } from '@aws-sdk/lib-dynamodb';
@@ -8,7 +7,7 @@ import { RekognitionClient, DetectModerationLabelsCommand, StartContentModeratio
 import { BedrockRuntimeClient, InvokeModelCommand } from '@aws-sdk/client-bedrock-runtime';
 import { SNSClient, PublishCommand } from '@aws-sdk/client-sns';
 import { v4 as uuidv4 } from 'uuid';
-import { ModerationResult, ModerationResultss } from '../types';
+import { ModerationResultss } from '../types';
 import { marshall } from '@aws-sdk/util-dynamodb';
 
 const region = "us-east-1";
@@ -31,35 +30,6 @@ const sns = new SNSClient([{ region, credentials, }]);
 const TABLE_NAME = "moderation-results";
 const SNS_TOPIC = "moderation-alerts!";
 const bucket = process.env.S3_BUCKET!;
-
-export const handler: S3Handler = async (event: S3Event) => {
-  try {
-    for (const record of event.Records) {
-      const bucket = record.s3.bucket.name;
-      const key = decodeURIComponent(record.s3.object.key.replace(/\+/g, ' '));
-
-      const result = await processContent(bucket, key);
-
-      await storeModerationResult(result);
-
-      if (result.is_inappropriate) {
-        await sendNotification(result);
-      }
-    }
-
-    return {
-      statusCode: 200,
-      body: JSON.stringify('Content processed successfully'),
-    };
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (error: any) {
-    console.error('Error:', error);
-    return {
-      statusCode: 500,
-      body: JSON.stringify(`Error processing content: ${error.message}`),
-    };
-  }
-};
 
 export const processContent = async (bucket: string, key: string) => {
   
@@ -327,18 +297,7 @@ export const viewAllItems = async () => {
   const tableName="moderation-results"
   const command = new ScanCommand({ TableName: tableName });
   const response = await dynamoClient.send(command);
-  const res = response.Items;
-  const daura: ModerationResult = {
-    id: uuidv4(),
-    bucket,
-    key,
-    content_type: "png",
-    file_size: 1280,
-    timestamp: new Date().toISOString(),
-    moderation_results,
-    is_inappropriate: false,
-    confidence_score: 0,
-  };
+  const res = response.Items; 
   res?.map((e) => {
     console.log(e.moderation_results+"=>"+e )    
   })

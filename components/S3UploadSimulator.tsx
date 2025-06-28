@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 import { useState, useCallback, FC } from 'react';
 import { Upload, Database, Zap, ArrowRight, Cloud, FileText, Video, Image } from 'lucide-react';
+import { addURL } from '@/amplify/addcontent';
 //import { addContent } from '@/backend/addcontent';
 
 interface S3UploadSimulatorProps {
@@ -55,16 +56,16 @@ export const S3UploadSimulator:FC<S3UploadSimulatorProps> = ({ onUpload, isProce
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0] as File;      
         simulateS3Upload(file, 'image');
-        //const filename = file.name;
-        //const contentType = file.type;
-        //const url = await addContent( filename, contentType) as string;        
+        const filename = file.name;
+        const contentType = file.type;
+        const url = await addURL( filename, contentType) as string;        
         
 
-        //await fetch(url, {
-        //  method: 'PUT',
-        //  body: file,
-        //  headers: { 'Content-Type': file.type },
-        //});                
+        await fetch(url, {
+          method: 'PUT',
+          body: file,
+          headers: { 'Content-Type': file.type },
+        });                
       
     }
   }, [simulateS3Upload]);
