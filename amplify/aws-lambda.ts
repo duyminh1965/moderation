@@ -10,11 +10,11 @@ import { v4 as uuidv4 } from 'uuid';
 import { ModerationResultss } from '../types';
 import { marshall } from '@aws-sdk/util-dynamodb';
 
-const region = "us-east-1";
+const region = process.env.REGION;
 
 const credentials = {
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+        accessKeyId: process.env.ACCESS_KEY_ID!,
+        secretAccessKey: process.env.SECRET_ACCESS_KEY!,
       };
 
 
