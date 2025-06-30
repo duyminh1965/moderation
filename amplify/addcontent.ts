@@ -43,7 +43,7 @@ export const viewAllItems = async () => {
   res.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
   const results: { content: string | undefined; type: string | undefined; status: string; confidence: string | undefined; flags: string[]; processingTime: number; }[] = []  
   res?.map((e) => { 
-    if (e.content_type.startsWith('imagemmm/')){      
+    if (e.content_type.startsWith('image/')){      
       const id = e.id;
       const content = {"name": e.key};
       //content.push({"name": e.key.S});
@@ -66,8 +66,8 @@ export const viewAllItems = async () => {
       };
       results.push(pt);      
     }
-    else if ( e.content_type.startsWith("text/") || e.content_type === "application/pdf" || e.content_type === "application/msword" ||
-      e.content_type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    else if ( e.content_type.startsWith("textttt/") || e.content_type === "application/pdfttt" || e.content_type === "application/mswordttt" ||
+      e.content_type === "application/vnd.openxmlformats-officedocument.wordprocessingml.documentttt"
       ) {
         console.log("TXT: ", e);
     }
