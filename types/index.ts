@@ -44,23 +44,13 @@ export const navigationtab = [
   {
     imgURL:Cloud,
     route: "/",
-    label: "S3 → Lambda Demo",    
-  },
-  {
-    imgURL:Video,
-    route: "/video-demo",
-    label: "Video Demo",    
-  },
+    label: "S3 → Lambda",    
+  },  
   {
     imgURL:Zap,
     route: "/architecture",
     label: "Architecture",    
-  },
-  {
-    imgURL:Settings,
-    route: "/content-upload",
-    label: "Content Upload",    
-  },
+  },  
   {
     imgURL: BarChart3,
     route: "/analytics",

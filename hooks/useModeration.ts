@@ -76,7 +76,7 @@ export const useModeration = () => {
     
     try {      
       const result = await mockModeration(content, type);      
-      //console.log("Result:",result)
+
       const newResult: ModerationResult = {
         ...result,
         id: Date.now().toString(),
