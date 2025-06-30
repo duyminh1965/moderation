@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { ModerationResult, AnalyticsData } from '../types';
+import { gepImages, viewAllItems } from '@/amplify/addcontent';
 
 // Simulate AWS Lambda + Bedrock/Rekognition processing
 const mockModeration = async (content: string | File, type: 'text' | 'image' | 'video'): Promise<Omit<ModerationResult, 'id' | 'timestamp'>> => {
@@ -53,17 +55,28 @@ const mockModeration = async (content: string | File, type: 'text' | 'image' | '
 export const useModeration = () => {
   const [results, setResults] = useState<ModerationResult[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [isActive, setIsActive] = useState(true)  
   //const items = viewAllItems(process.env.DYNAMODB_TABLE!)
-
+  useEffect(() => {
+          const CallData = async () => {
+              const dataFirst = await viewAllItems();  
+              setResults(dataFirst as any[]);            
+              return dataFirst;
+          };
+          if (isActive) {
+              CallData();              
+              //console.log("dataone:" + dataone)
+              setIsActive(false);
+          }
+      }, [isActive]);
   //console.log("KQ: "+items);
 
   const moderateContent = useCallback(async (content: string | File, type: 'text' | 'image' | 'video') => {
     setIsProcessing(true);    
     
-    try {
-      alert("type: 1");
-      const result = await mockModeration(content, type);
-      alert("type: 2");
+    try {      
+      const result = await mockModeration(content, type);      
+      //console.log("Result:",result)
       const newResult: ModerationResult = {
         ...result,
         id: Date.now().toString(),
@@ -71,6 +84,8 @@ export const useModeration = () => {
       };
       
       setResults(prev => [newResult, ...prev]);
+      
+      //console.log("newResult:",newResult)
       return newResult;
     } finally {
       setIsProcessing(false);
@@ -79,6 +94,7 @@ export const useModeration = () => {
 
   const getAnalytics = useCallback((): AnalyticsData => {
     const totalProcessed = results.length;
+    //alert("totalProcessed : "+totalProcessed );
     const approved = results.filter(r => r.status === 'approved').length;
     const flagged = results.filter(r => r.status === 'flagged').length;
     const rejected = results.filter(r => r.status === 'rejected').length;

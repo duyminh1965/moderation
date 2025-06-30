@@ -88,7 +88,7 @@ export const ModerationResult: React.FC<ModerationResultProps> = ({ result }) =>
                   style={{ width: `${result.confidence}%` }}
                 />
               </div>
-              <span className="text-sm text-gray-600">{result.confidence.toFixed(1)}%</span>
+              <span className="text-sm text-gray-600">{result.confidence}%</span>
             </div>
           </div>
           <div className="text-right">

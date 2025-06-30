@@ -1,27 +1,15 @@
 "use client"
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { AnalyticsDashboard } from '@/components/AnalyticsDashboard';
 import { useModeration } from '@/hooks/useModeration';
-//import { viewAllItems } from '@/backend/aws-lambda';
+
 
 
 const Page = () => {
-      const [isActive, setIsActive] = useState(true)  
+      
   const { getAnalytics } = useModeration();
-
-  useEffect(() => {
-        const CallData = async () => {
-            const dataFirst = "";//await viewAllItems(process.env.DYNAMODB_TABLE!);
-            
-            return dataFirst;
-        };
-        if (isActive) {
-            const dataone = CallData();
-            console.log("dataone:" + dataone)
-            setIsActive(false);
-        }
-    }, [isActive]);
+ 
   const analytics = getAnalytics();
   return (
     <div>
